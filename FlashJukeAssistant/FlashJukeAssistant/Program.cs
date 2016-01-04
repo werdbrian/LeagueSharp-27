@@ -83,7 +83,15 @@ namespace FlashJukeAssistant
         }
         private static void OnGameUpdate(EventArgs args)
         {
-            findClosest();
+            if (!Config.Item("key").GetValue<KeyBind>().Active)
+            {
+                shouldBeFlashing = false;
+                closestFlashSpot = -1;
+            }
+            else
+            {
+                findClosest();
+            }
             if (closestFlashSpot != -1 && shouldBeFlashing && someSpellReady(Spots[closestFlashSpot].start))
             {
                 ObjectManager.Player.IssueOrder(GameObjectOrder.MoveTo, Spots[closestFlashSpot].start);
@@ -180,10 +188,10 @@ namespace FlashJukeAssistant
                     }
                     else
                     {
-                        Render.Circle.DrawCircle(Spots[i].start, 50, System.Drawing.Color.Red, thick);
+                        Render.Circle.DrawCircle(Spots[i].start, 50, System.Drawing.Color.Gray, thick);
                         if (someSpellReady(Spots[i].start))
                         {
-                            Drawing.DrawLine(Drawing.WorldToScreen(Spots[i].start), Drawing.WorldToScreen(Spots[i].end), 2, System.Drawing.Color.Red);
+                            Drawing.DrawLine(Drawing.WorldToScreen(Spots[i].start), Drawing.WorldToScreen(Spots[i].end), 2, System.Drawing.Color.Gray);
                         }
                     }
                 }
