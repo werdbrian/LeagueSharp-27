@@ -50,9 +50,9 @@ namespace Twitch
             _config.SubMenu("Combo").AddItem(new MenuItem("ghost", "Use Ghostblade").SetValue(true));
             _config.SubMenu("Combo").AddItem(new MenuItem("botrk", "Use Botrk").SetValue(true));
 
+            _config.SubMenu("Drawings").AddItem(new MenuItem("ultDraw", "Draw ult range").SetValue(true));
             _config.SubMenu("Drawings").AddItem(new MenuItem("EDamage", "E Damage").SetValue(new Circle(true, Color.White)));
-            _config.SubMenu("Drawings").AddItem(new MenuItem("drawStealth", "Draw stealth indicator").SetValue(true));
-            _config.SubMenu("Drawings").AddItem(new MenuItem("stealthColor", "Stealth indicator color").SetValue(new Circle(true, Color.Purple)));
+            _config.SubMenu("Drawings").AddItem(new MenuItem("stealthColor", "Stealth indicator").SetValue(new Circle(true, Color.Purple)));
 
             _config.AddToMainMenu();
 
@@ -82,19 +82,23 @@ namespace Twitch
         {
             CustomDamageIndicator.DrawingColor = _config.Item("EDamage").GetValue<Circle>().Color;
             CustomDamageIndicator.Enabled = _config.Item("EDamage").GetValue<Circle>().Active;
-            if (_config.Item("drawStealth").GetValue<Boolean>())
+            if (_config.Item("ultDraw").GetValue<Boolean>() && !Player.HasBuff("TwitchFullAutomatic"))
+            {
+                Render.Circle.DrawCircle(Player.Position, 1000, Color.Yellow,1);
+            }
+            if (_config.Item("stealthColor").GetValue<Circle>().Active)
             {
                 if (Player.HasBuff("TwitchHideInShadows"))
                 {
                     float rad = ((Game.Time-Player.GetBuff("TwitchHideInShadows").StartTime)/getStealthDuration())*700;
-                    Drawing.DrawCircle(Player.Position, rad, _config.Item("stealthColor").GetValue<Circle>().Color);
+                    Render.Circle.DrawCircle(Player.Position, rad, _config.Item("stealthColor").GetValue<Circle>().Color);
                     lastQStarted = 0;
                 }
                 if (lastQStarted!= 0 && (lastQStarted+4.5>Game.Time || lastTimeAttacked+1.5>Game.Time))
                 {
                     float timeNeeded = (float)Math.Min(lastQStarted + 4.5 - Game.Time, lastTimeAttacked + 1.5 - Game.Time);
                     float rad = ((1.5f-timeNeeded)/1.5f) * 700;
-                    Drawing.DrawCircle(Player.Position, rad, _config.Item("stealthColor").GetValue<Circle>().Color);
+                    Render.Circle.DrawCircle(Player.Position, rad, _config.Item("stealthColor").GetValue<Circle>().Color);
                 }
             }
         } 
