@@ -25,40 +25,10 @@ namespace Twitch
         {
             CustomEvents.Game.OnGameLoad += Game_OnGameLoad;
         }
-
-        private static float GetDamage(Obj_AI_Hero target)
-        {
-            return GetEDamage(target)+getPassiveDamage(target);
-        }
         private static float GetEDamage(Obj_AI_Hero target)
         {
             return _e.GetDamage(target);
         }
-        private static float getPassiveDamage(Obj_AI_Hero target)
-        {
-            BuffInstance buff = target.GetBuff("twitchdeadlyvenom");
-            float passiveDurationMax=_config.Item("PassDur").GetValue<Slider>().Value;
-            int passiveDurationSeconds = (int)Math.Floor(Math.Min((buff.EndTime - Game.Time), passiveDurationMax));
-            float totalPassiveDamage = buff.Count * (12 + (6 * ((Player.Level - 1) / 4)));
-            float passiveDamagePerTick = totalPassiveDamage / 6;
-            float passiveDamage = passiveDamagePerTick * passiveDurationSeconds;
-            return passiveDamage+getIgniteDamage(target)-getMaximumRegen(target,passiveDurationSeconds);
-        }
-        private static float getIgniteDamage(Obj_AI_Hero target)
-        {
-            if (!target.HasBuff("SummonerDot")) { return 0; }
-            BuffInstance buff = target.GetBuff("SummonerDot");
-            float igniteDurationMax = _config.Item("PassDur").GetValue<Slider>().Value;
-            int igniteDurationSeconds = (int)Math.Floor(Math.Min((buff.EndTime - Game.Time), igniteDurationMax));
-            float totalPassiveDamage = 50 + 20 * Player.Level;
-            float igniteDamagePerTick = totalPassiveDamage / 5;
-            float igniteDamage = igniteDamagePerTick * igniteDurationSeconds;
-            return igniteDamage;
-        }
-        private static float getMaximumRegen(Obj_AI_Hero target, int time)
-        {
-            return target.HPRegenRate* time * 2;;
-    }
         private static void Game_OnGameLoad(EventArgs args)
         {
             if (Player.ChampionName != "Twitch")
@@ -77,16 +47,16 @@ namespace Twitch
             _config.AddSubMenu(targetSelectorMenu);
 
             _config.SubMenu("Combo").AddItem(new MenuItem("UseWCombo", "Use W").SetValue(true));
+            _config.SubMenu("Combo").AddItem(new MenuItem("ghost", "Use Ghostblade").SetValue(true));
+            _config.SubMenu("Combo").AddItem(new MenuItem("botrk", "Use Botrk").SetValue(true));
 
-            _config.SubMenu("Secure Kill").AddItem(new MenuItem("EDamage", "Health gone after X seconds").SetValue(new Circle(true, Color.White)));
-            _config.SubMenu("Secure Kill").AddItem(new MenuItem("PassDur", "X (0 - dont wait for passive)").SetValue(new Slider(6,0,6)));
-
+            _config.SubMenu("Drawings").AddItem(new MenuItem("EDamage", "E Damage").SetValue(new Circle(true, Color.White)));
             _config.SubMenu("Drawings").AddItem(new MenuItem("drawStealth", "Draw stealth indicator").SetValue(true));
             _config.SubMenu("Drawings").AddItem(new MenuItem("stealthColor", "Stealth indicator color").SetValue(new Circle(true, Color.Purple)));
 
             _config.AddToMainMenu();
 
-            CustomDamageIndicator.Initialize(GetDamage);
+            CustomDamageIndicator.Initialize(GetEDamage);
             Game.OnUpdate += Game_OnUpdate;
             Drawing.OnDraw += Drawing_OnDraw;
             Obj_AI_Base.OnProcessSpellCast += OnSpellProcess;
@@ -132,20 +102,11 @@ namespace Twitch
         {
             return Player.Spellbook.GetSpell(SpellSlot.Q).Level + 3;
         }
-        private static bool ePassiveComboKills(Obj_AI_Hero target)
-        {
-            float damage = GetDamage(target);
-            if (damage > target.Health + target.PhysicalShield)
-            {
-                return true;
-            }
-            return false;
-        }
         private static void Game_OnUpdate(EventArgs args)
         {
             if (_e.IsReady())
             {
-                foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(enemy => enemy.IsValidTarget(_e.Range) && enemy.HasBuff("twitchdeadlyvenom") && ePassiveComboKills(enemy)))
+                foreach (var enemy in ObjectManager.Get<Obj_AI_Hero>().Where(enemy => enemy.IsValidTarget(_e.Range) && enemy.Health<GetEDamage(enemy)))
                 {
                     _e.Cast();
                 }
@@ -174,7 +135,7 @@ namespace Twitch
                 }
 
                 //Use Botrk
-                if (target != null && target.Type == Player.Type &&
+                if (target != null && _config.Item("botrk").GetValue<bool>() && target.Type == Player.Type &&
                     target.ServerPosition.Distance(Player.ServerPosition) < 450)
                 {
                     var hasCutGlass = Items.HasItem(3144);
@@ -190,7 +151,7 @@ namespace Twitch
                 }
 
                 //Use Youmus
-                if (target != null && target.Type == Player.Type && Orbwalking.InAutoAttackRange(target))
+                if (target != null && _config.Item("ghost").GetValue<bool>() && target.Type == Player.Type && Orbwalking.InAutoAttackRange(target))
                 {
                     Items.UseItem(3142);
                 }
