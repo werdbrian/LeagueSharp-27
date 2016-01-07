@@ -18,9 +18,13 @@ namespace Enemy_Vision
         public System.Drawing.Color color;
         public PolygonConstants()
         {
+            update();
+        }
+        public void update()
+        {
             alfa = (float)(2 * Math.PI / circleDetail);
             sinTable = new float[circleDetail];
-            cosTable = new float[circleDetail]; 
+            cosTable = new float[circleDetail];
             double currentAlfa = -alfa;
             for (int i = 0; i < circleDetail; i++)
             {

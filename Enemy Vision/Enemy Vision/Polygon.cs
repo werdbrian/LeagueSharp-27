@@ -38,8 +38,7 @@ namespace Enemy_Vision
         }
         private bool blocksSight(Vector3 pos)
         {
-            CollisionFlags flags = NavMesh.GetCollisionFlags(pos);
-            return (flags == CollisionFlags.Wall || flags == CollisionFlags.Grass);
+            return (NavMesh.GetCollisionFlags(pos) == CollisionFlags.Wall || NavMesh.IsWallOfGrass(pos,100));
         }
     }
 }

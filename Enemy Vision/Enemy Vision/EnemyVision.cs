@@ -23,8 +23,8 @@ namespace Enemy_Vision
         {
             _config = new Menu("EnemyVision", "Enemy Vision", true);
             _config.AddItem(new MenuItem("color", "Color").SetValue(new Circle(true, System.Drawing.Color.Red)));
-            _config.AddItem(new MenuItem("lineSegments", "Line Segments").SetValue(new Slider(20, 10, 80)));
-            _config.AddItem(new MenuItem("circleSegments", "Circle Segments").SetValue(new Slider(20, 10, 160)));
+            _config.AddItem(new MenuItem("lineSegments", "Line Segments").SetValue(new Slider(50, 20, 100)));
+            _config.AddItem(new MenuItem("circleSegments", "Circle Segments").SetValue(new Slider(90, 20, 180)));
             _config.AddToMainMenu();
 
             pm = new PolygonManager();
@@ -42,6 +42,7 @@ namespace Enemy_Vision
             pm.pc.color = _config.Item("color").GetValue<Circle>().Color;
             pm.pc.circleDetail = _config.Item("circleSegments").GetValue<Slider>().Value;
             pm.pc.lineDetail = _config.Item("lineSegments").GetValue<Slider>().Value;
+            pm.pc.update();
 
         }
         private void Game_OnUpdate(EventArgs args)

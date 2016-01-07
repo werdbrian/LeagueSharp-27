@@ -21,7 +21,6 @@ namespace Enemy_Vision
         private float championSightRange = 1200;
         private float towerSightRange = 1095;
         private float minionSightRange = 1100;
-        private Vector3 screenMiddle;
         float maximumDistanceFromCenter;
         public List<Polygon> polygons;
         public PolygonManager()
@@ -29,12 +28,11 @@ namespace Enemy_Vision
             solution = new Paths();
             pc = new PolygonConstants();
             polygons = new List<Polygon>();
-            maximumDistanceFromCenter = 2*screenMiddle.Distance(Drawing.ScreenToWorld(new Vector2(0, 0)));
-
         }
         public void update()
         {
-            screenMiddle = Drawing.ScreenToWorld(new Vector2(Drawing.Width / 2, Drawing.Height / 2));
+            Vector3 screenMiddle = Drawing.ScreenToWorld((float)Drawing.Width / 2f, (float)Drawing.Height / 2f); //works
+            maximumDistanceFromCenter = 3000;
             polygons = new List<Polygon>();
             //MINIONS
             var minions = MinionManager.GetMinions(screenMiddle, minionSightRange + maximumDistanceFromCenter, MinionTypes.All, MinionTeam.Enemy);
