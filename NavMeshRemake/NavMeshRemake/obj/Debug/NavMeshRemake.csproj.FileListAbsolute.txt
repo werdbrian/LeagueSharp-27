@@ -1,0 +1,12 @@
+F:\LeagueSharpProjects\NavMeshRemake\NavMeshRemake\NavMeshRemake\bin\Debug\NavMeshRemake.dll
+F:\LeagueSharpProjects\NavMeshRemake\NavMeshRemake\NavMeshRemake\bin\Debug\NavMeshRemake.pdb
+F:\LeagueSharpProjects\NavMeshRemake\NavMeshRemake\NavMeshRemake\bin\Debug\clipper_library.dll
+F:\LeagueSharpProjects\NavMeshRemake\NavMeshRemake\NavMeshRemake\bin\Debug\LeagueSharp.Common.dll
+F:\LeagueSharpProjects\NavMeshRemake\NavMeshRemake\NavMeshRemake\bin\Debug\LeagueSharp.dll
+F:\LeagueSharpProjects\NavMeshRemake\NavMeshRemake\NavMeshRemake\bin\Debug\SharpDX.dll
+F:\LeagueSharpProjects\NavMeshRemake\NavMeshRemake\NavMeshRemake\bin\Debug\SharpDX.Direct3D9.dll
+F:\LeagueSharpProjects\NavMeshRemake\NavMeshRemake\NavMeshRemake\bin\Debug\LeagueSharp.Sandbox.dll
+F:\LeagueSharpProjects\NavMeshRemake\NavMeshRemake\NavMeshRemake\bin\Debug\LeagueSharp.xml
+F:\LeagueSharpProjects\NavMeshRemake\NavMeshRemake\NavMeshRemake\obj\Debug\NavMeshRemake.csprojResolveAssemblyReference.cache
+F:\LeagueSharpProjects\NavMeshRemake\NavMeshRemake\NavMeshRemake\obj\Debug\NavMeshRemake.dll
+F:\LeagueSharpProjects\NavMeshRemake\NavMeshRemake\NavMeshRemake\obj\Debug\NavMeshRemake.pdb
