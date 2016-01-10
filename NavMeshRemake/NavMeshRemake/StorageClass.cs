@@ -4,17 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ClipperLib;
-using LeagueSharp;
-using LeagueSharp.Common;
-using SharpDX;
 
 namespace NavMeshRemake
 {
-    using Polygon = System.Collections.Generic.List<IntPoint>;
-    using PolygonSet = System.Collections.Generic.List<System.Collections.Generic.List<IntPoint>>;
-    public static class StorageClass
+    using Polygon = System.Collections.Generic.List<ClipperLib.IntPoint>;
+    using PolygonSet = System.Collections.Generic.List<System.Collections.Generic.List<ClipperLib.IntPoint>>;
+    using IntPoint = ClipperLib.IntPoint;
+    static class StorageClass
     {
-        public static PolygonSet unitCollisionPolygonSet = new PolygonSet() { new Polygon() { new IntPoint(16000, 16000), new IntPoint(0, 16000), new IntPoint(0, 0), new IntPoint(16000, 0) }, new Polygon() { new
+        public static PolygonSet unitCollision = new PolygonSet() { new Polygon() { new IntPoint(16000, 16000), new IntPoint(0, 16000), new IntPoint(0, 0), new IntPoint(16000, 0) }, new Polygon() { new
 IntPoint(215, 115), new IntPoint(215, 215), new IntPoint(115, 215), new IntPoint(115, 265), new IntPoint(15, 265), new IntPoint(15, 685), new IntPoint(65, 685), new IntPoint(65, 735), new IntPoint(89,
 735), new IntPoint(89, 743), new IntPoint(115, 743), new IntPoint(115, 785), new IntPoint(139, 785), new IntPoint(139, 793), new IntPoint(209, 793), new IntPoint(209, 785), new IntPoint(215, 785), new
 IntPoint(215, 835), new IntPoint(239, 835), new IntPoint(239, 843), new IntPoint(309, 843), new IntPoint(309, 835), new IntPoint(315, 835), new IntPoint(315, 885), new IntPoint(339, 885), new
@@ -843,7 +841,7 @@ IntPoint(4365, 1143), new IntPoint(4365, 1365), new IntPoint(4209, 1365), new In
 IntPoint(10513, 1115), new IntPoint(10513, 1165), new IntPoint(10457, 1165), new IntPoint(10457, 1123), new IntPoint(10433, 1123), new IntPoint(10433, 1115), new IntPoint(10407, 1115), new
 IntPoint(10407, 1073), new IntPoint(10383, 1073), new IntPoint(10383, 1065), new IntPoint(10357, 1065), new IntPoint(10357, 993), new IntPoint(10407, 993), new IntPoint(10407, 943), new
 IntPoint(10457, 943), new IntPoint(10457, 885), new IntPoint(10487, 885) } };
-        public static PolygonSet bushCollisionPolygonSet = new PolygonSet{new Polygon(){new IntPoint(5508,3238),new IntPoint(5533,3285),new IntPoint(5547,3336),new IntPoint(5544,3388),new IntPoint(5546,3449),new
+        public static PolygonSet bushCollision = new PolygonSet{new Polygon(){new IntPoint(5508,3238),new IntPoint(5533,3285),new IntPoint(5547,3336),new IntPoint(5544,3388),new IntPoint(5546,3449),new
 IntPoint(5586,3482),new IntPoint(5656,3486),new IntPoint(5718,3483),new IntPoint(5780,3485),new IntPoint(5841,3482),new IntPoint(5846,3520),new IntPoint(5831,3562),new IntPoint(5779,3574),new
 IntPoint(5711,3579),new IntPoint(5628,3581),new IntPoint(5532,3580),new IntPoint(5470,3578),new IntPoint(5420,3562),new IntPoint(5404,3469),new IntPoint(5400,3377),new IntPoint(5405,3294),new
 IntPoint(5432,3237)},new Polygon(){new IntPoint(6562,3036),new IntPoint(6608,3033),new IntPoint(6633,3040),new IntPoint(6675,3036),new IntPoint(6721,3034),new IntPoint(6777,3034),new
@@ -991,7 +989,7 @@ IntPoint(7936,11933),new IntPoint(7905,11931),new IntPoint(7874,11933),new IntPo
 IntPoint(7758,11879),new IntPoint(7750,11864),new IntPoint(7750,11843),new IntPoint(7732,11831),new IntPoint(7707,11831),new IntPoint(7703,11811),new IntPoint(7700,11783),new IntPoint(7700,11760),new
 IntPoint(7700,11735),new IntPoint(7704,11710),new IntPoint(7716,11687),new IntPoint(7729,11688),new IntPoint(7746,11688),new IntPoint(7746,11717),new IntPoint(7756,11735),new IntPoint(7771,11741),new
 IntPoint(7798,11749),new IntPoint(7815,11741),new IntPoint(7846,11734),new IntPoint(7870,11740),new IntPoint(7901,11740),new IntPoint(7941,11741),new IntPoint(7979,11738),new IntPoint(8015,11738),new
-IntPoint(8051,11735),new IntPoint(8096,11735),new IntPoint(8157,11718),new IntPoint(8179,11690),new IntPoint(8198,11684),new IntPoint(8269,11684)},}; public static PolygonSet visionCollisionPolygonSet = new
+IntPoint(8051,11735),new IntPoint(8096,11735),new IntPoint(8157,11718),new IntPoint(8179,11690),new IntPoint(8198,11684),new IntPoint(8269,11684)},}; public static PolygonSet visionCollision = new
 PolygonSet() { new Polygon() { new IntPoint(16000, 16000), new IntPoint(0, 16000), new IntPoint(0, 0), new IntPoint(16000, 0) }, new Polygon() { new IntPoint(215, 115), new IntPoint(215, 215), new
 IntPoint(115, 215), new IntPoint(115, 265), new IntPoint(15, 265), new IntPoint(15, 685), new IntPoint(65, 685), new IntPoint(65, 735), new IntPoint(89, 735), new IntPoint(89, 743), new IntPoint(115,
 743), new IntPoint(115, 785), new IntPoint(139, 785), new IntPoint(139, 793), new IntPoint(209, 793), new IntPoint(209, 785), new IntPoint(215, 785), new IntPoint(215, 835), new IntPoint(239, 835),
