@@ -1,0 +1,13 @@
+F:\LeagueSharpProjects\Enemy Vision\Enemy Vision\Enemy Vision\bin\Release\Enemy Vision.exe.config
+F:\LeagueSharpProjects\Enemy Vision\Enemy Vision\Enemy Vision\bin\Release\Enemy Vision.exe
+F:\LeagueSharpProjects\Enemy Vision\Enemy Vision\Enemy Vision\bin\Release\Enemy Vision.pdb
+F:\LeagueSharpProjects\Enemy Vision\Enemy Vision\Enemy Vision\bin\Release\clipper_library.dll
+F:\LeagueSharpProjects\Enemy Vision\Enemy Vision\Enemy Vision\bin\Release\LeagueSharp.Common.dll
+F:\LeagueSharpProjects\Enemy Vision\Enemy Vision\Enemy Vision\bin\Release\LeagueSharp.dll
+F:\LeagueSharpProjects\Enemy Vision\Enemy Vision\Enemy Vision\bin\Release\SharpDX.dll
+F:\LeagueSharpProjects\Enemy Vision\Enemy Vision\Enemy Vision\bin\Release\SharpDX.Direct3D9.dll
+F:\LeagueSharpProjects\Enemy Vision\Enemy Vision\Enemy Vision\bin\Release\LeagueSharp.Sandbox.dll
+F:\LeagueSharpProjects\Enemy Vision\Enemy Vision\Enemy Vision\bin\Release\LeagueSharp.xml
+F:\LeagueSharpProjects\Enemy Vision\Enemy Vision\Enemy Vision\obj\Debug\Enemy Vision.csprojResolveAssemblyReference.cache
+F:\LeagueSharpProjects\Enemy Vision\Enemy Vision\Enemy Vision\obj\Debug\Enemy Vision.exe
+F:\LeagueSharpProjects\Enemy Vision\Enemy Vision\Enemy Vision\obj\Debug\Enemy Vision.pdb

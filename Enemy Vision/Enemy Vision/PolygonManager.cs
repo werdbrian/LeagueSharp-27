@@ -14,8 +14,6 @@ namespace Enemy_Vision
     using Paths = List<List<IntPoint>>;
     class PolygonManager
     {
-        Polygon[] polygonsArray;
-        Clipper clipper;
         Paths solution;
         public PolygonConstants pc;
         private float championSightRange = 1200;

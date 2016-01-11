@@ -23,7 +23,8 @@ namespace Enemy_Vision
         private void Game_OnGameLoad(EventArgs args)
         {
             _config = new Menu("EnemyVision", "Enemy Vision", true);
-            _config.AddItem(new MenuItem("enabled", "Enabled")).SetValue(new KeyBind(32, KeyBindType.Press));
+            _config.AddItem(new MenuItem("enabled", "Press")).SetValue(new KeyBind(32, KeyBindType.Press));
+            _config.AddItem(new MenuItem("toggled", "Toggle")).SetValue(new KeyBind('Z', KeyBindType.Toggle));
             _config.AddItem(new MenuItem("color", "Color").SetValue(new Circle(true, System.Drawing.Color.Red)));
             _config.AddItem(new MenuItem("lineSegments", "Line Segments").SetValue(new Slider(50, 20, 100)));
             _config.AddItem(new MenuItem("circleSegments", "Circle Segments").SetValue(new Slider(90, 20, 180)));
@@ -49,14 +50,14 @@ namespace Enemy_Vision
         }
         private void Game_OnUpdate(EventArgs args)
         {
-            if (_config.Item("enabled").GetValue<KeyBind>().Active)
+            if (_config.Item("toggled").GetValue<KeyBind>().Active || _config.Item("enabled").GetValue<KeyBind>().Active)
             {
                 pm.update();
             }
         }
         private void Drawing_OnDraw(EventArgs args)
         {
-            if (_config.Item("enabled").GetValue<KeyBind>().Active)
+            if (_config.Item("toggled").GetValue<KeyBind>().Active || _config.Item("enabled").GetValue<KeyBind>().Active)
             {
                 pm.drawAll();
             }
