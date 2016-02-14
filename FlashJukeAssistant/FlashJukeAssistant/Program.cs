@@ -125,9 +125,9 @@ namespace FlashJukeAssistant
         }
         public static void doTheFlash()
         {
-            if (ObjectManager.Player.ChampionName == "Shaco" && willBeAbleToCastOnArrival(SpellSlot.Q, Spots[closestFlashSpot].start))
+            if (ObjectManager.Player.ChampionName == "Zed" && willBeAbleToCastOnArrival(SpellSlot.W, Spots[closestFlashSpot].start))
             {
-                ObjectManager.Player.Spellbook.CastSpell(SpellSlot.Q, Spots[closestFlashSpot].target);
+                ObjectManager.Player.Spellbook.CastSpell(SpellSlot.W, Spots[closestFlashSpot].target);
             }
             else
             {
@@ -194,7 +194,7 @@ namespace FlashJukeAssistant
         }
         private static bool someSpellReady(Vector3 pos)
         {
-            return ObjectManager.Player.Spellbook.CanUseSpell(flash) == SpellState.Ready || (ObjectManager.Player.ChampionName == "Shaco" && willBeAbleToCastOnArrival(SpellSlot.Q, pos));
+            return ObjectManager.Player.Spellbook.CanUseSpell(flash) == SpellState.Ready || (ObjectManager.Player.ChampionName == "Zed" && willBeAbleToCastOnArrival(SpellSlot.W, pos));
         }
         private static void findClosest()
         {
